@@ -1,0 +1,22 @@
+{
+  "name": "greeter-ui",
+  "version": "1.0.0",
+  "description": "UI for the Greeter Contracts",
+  "main": "truffle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ksolo/hoscdev-greeter-ui.git"
+  },
+  "author": "Kevin Solorio, Dave Hoover",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ksolo/hoscdev-greeter-ui/issues"
+  },
+  "homepage": "https://github.com/ksolo/hoscdev-greeter-ui#readme",
+  "dependencies": {
+    "lite-server": "^2.4.0"
+  }
+}
