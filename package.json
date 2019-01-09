@@ -4,6 +4,7 @@
   "description": "UI for the Greeter Contracts",
   "main": "truffle.js",
   "scripts": {
+    "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
