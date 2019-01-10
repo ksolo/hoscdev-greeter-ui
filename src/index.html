@@ -2,10 +2,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/app.css">
   <title>Greeter</title>
 </head>
 <body>
-
+  <main>
+    <section class="current-greeting">
+      <header>
+        Hello, World!
+      </header>
+    </section>
+    <section class="update-greeting">
+      <form id="set-greeting">
+        <div>
+          <label>Update Greeting</label>
+          <input type="text" name="greeting">
+        </div>
+        <div>
+          <input type="submit" value="update">
+        </div>
+      </form>
+    </section>
+  </main>
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
   <script src="js/app.js" type="text/javascript"></script>
 </body>
