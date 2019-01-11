@@ -8,7 +8,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 25px auto;
+  margin: auto;
   min-height: 100%;
   width: 80%;
 }
@@ -35,7 +35,7 @@ section.update-greeting {
 }
 
 section.update-greeting form {
-  margin: 30px auto;
+  margin: 20px auto;
   text-align: center;
 }
 
@@ -51,6 +51,7 @@ form input[type=text] {
 }
 
 form input[type=submit] {
+  background-color: transparent;
   border: 3px solid black;
   color: black;
   font-size: 0.8em;
