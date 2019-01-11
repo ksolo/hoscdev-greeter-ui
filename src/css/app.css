@@ -1,16 +1,21 @@
+html, body { 
+  height: 100%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 main {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 25px auto;
+  min-height: 100%;
   width: 80%;
 }
 
 section.current-greeting {
   align-items: center;
   background-color: lightblue;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   font-size: 4em;
@@ -19,4 +24,35 @@ section.current-greeting {
   min-height: 200px;
   width: 100%;
   text-align: center;
+}
+
+section.update-greeting {
+  border: 1px solid lightblue;
+
+  font-size: 2em;
+  min-height: 300px;
+  width: 100%;
+}
+
+section.update-greeting form {
+  margin: 30px auto;
+  text-align: center;
+}
+
+form label {
+  display: none;  
+}
+
+form input[type=text] {
+  display: inline-block;
+  font-size: 1em;
+  margin: 20px;
+  width: 80%;
+}
+
+form input[type=submit] {
+  border: 3px solid black;
+  color: black;
+  font-size: 0.8em;
+  text-transform: uppercase;
 }
