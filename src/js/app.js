@@ -1,9 +1,5 @@
-(function(window){
-  class App {
-    constructor() {
-      this.initWeb3()
-    }
-
+(async function(window){
+  const App = {
     async initWeb3() {
       // modern browsers use the ethereum provider
       if (window.ethereum) {
@@ -20,7 +16,23 @@
       else {
         this.web3Provder = new Web3.providers.HttpProvider("http://localhost:8545");
       }
-      window.web3 = new Web3(this.web3Provder);
+      this.web3 = new Web3(this.web3Provder);
+      window.App = this;
+    },
+
+    async initGreeter() {
+      const greeterResponse = await fetch("Greeter.json");
+      const greeterJSON = await greeterResponse.json();
+      const Greeter = await new App.web3.eth.Contract(
+        greeterJSON.abi, 
+        "0xBC8fe471027f75971351b35956A3e8b29D75F9De"
+      );
+
+      Greeter.setProvider(App.web3Provder);
+      window.Greeter = Greeter;
     }
   }
-}(window)
+
+  await App.initWeb3();
+  await App.initGreeter();
+})(window);
