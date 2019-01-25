@@ -30,9 +30,28 @@
 
       Greeter.setProvider(App.web3Provder);
       window.Greeter = Greeter;
+    },
+
+    updateGreeting: function(newGreeting) {
+      const header = document.querySelector(".current-greeting header");
+      header.textContent = newGreeting;
+    },
+
+    bindFormSubmission: function() {
+      const form = document.getElementById("set-greeting");
+      form.onsubmit = this.handleFormSubmission;
+    },
+
+    handleFormSubmission: async function(event) {
+      event.preventDefault();
+      const greeting = this.querySelector("input[type=text]").value;
+      await Greeter.methods.setGreeting(greeting).send({from: App.web3.eth.accounts[0]});
+      this.reset();
     }
   }
 
+
   await App.initWeb3();
   await App.initGreeter();
+  App.bindFormSubmission();
 })(window);
