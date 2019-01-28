@@ -41,15 +41,18 @@
       await App.updateGreeting();
 
       this.reset();
+    },
+
+    init: async function() {
+      await App.initWeb3();
+      await App.initGreeter();
+      await App.updateGreeting();
+
+      App.bindFormSubmission();
     }
   }
 
-
-  await App.initWeb3();
-  await App.initGreeter();
-  await App.updateGreeting();
-
-  App.bindFormSubmission();
+  App.init();
 
   window.App = App;
 })(window);
