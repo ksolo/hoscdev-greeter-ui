@@ -1,51 +1,45 @@
 (async function(window){
   const App = {
     async initWeb3() {
-      // modern browsers use the ethereum provider
-      if (window.ethereum) {
-        this.web3Provider = window.ethereum;
-        try {
-          await this.web3Provider.enable();
-        } catch(error) {
-          console.error("User denied account access");
-        }
-      }
-      else if (window.web3) {
-        this.web3Provider = window.web3.curentProvider;
-      }
-      else {
-        this.web3Provder = new Web3.providers.HttpProvider("http://localhost:8545");
-      }
-      this.web3 = new Web3(this.web3Provder);
-      window.App = this;
+      const provider = Web3.givenProvider || "http://localhost:8545";
+      App.web3 = new Web3(provider);
     },
 
     async initGreeter() {
       const greeterResponse = await fetch("Greeter.json");
       const greeterJSON = await greeterResponse.json();
+
       const Greeter = await new App.web3.eth.Contract(
         greeterJSON.abi, 
-        "0xBC8fe471027f75971351b35956A3e8b29D75F9De"
+        "0x33C152444A23Ab8bA4Ac48b13F982fe5e63f60B8"
       );
 
-      Greeter.setProvider(App.web3Provder);
-      window.Greeter = Greeter;
+      App.Greeter = Greeter;
     },
 
-    updateGreeting: function(newGreeting) {
+    updateGreeting: async function() {
       const header = document.querySelector(".current-greeting header");
-      header.textContent = newGreeting;
+      const greeting = await App.Greeter.methods.greet().call();
+
+      header.textContent = greeting;
     },
 
     bindFormSubmission: function() {
       const form = document.getElementById("set-greeting");
-      form.onsubmit = this.handleFormSubmission;
+      form.onsubmit = App.handleFormSubmission;
     },
 
     handleFormSubmission: async function(event) {
       event.preventDefault();
+
       const greeting = this.querySelector("input[type=text]").value;
-      await Greeter.methods.setGreeting(greeting).send({from: App.web3.eth.accounts[0]});
+      const accounts = await App.web3.eth.getAccounts();
+
+      const transaction = await App.Greeter.methods.setGreeting(greeting)
+        .send({from: accounts[0]});
+
+      await App.updateGreeting();
+
       this.reset();
     }
   }
@@ -53,5 +47,9 @@
 
   await App.initWeb3();
   await App.initGreeter();
+  await App.updateGreeting();
+
   App.bindFormSubmission();
+
+  window.App = App;
 })(window);
